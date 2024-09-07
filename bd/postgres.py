@@ -10,8 +10,6 @@ env_vars = dotenv_values(local_path)
 class Dbsession():
     def connection(self):
 
-        print(env_vars)
-
         conn = psycopg2.connect(
             dbname = env_vars.get("POSTGRES_DB"),
             user = env_vars.get("POSTGRES_USER"),

@@ -1664,17 +1664,18 @@ class ASPF():
                 
                 connect.commit()
 
-                return idform[0]
+                return {'validacao':True, 'idoform':idform[0]}
             
             except Exception as error:
                 
-                traceback.print_exc()
+                
+                
                 connect.rollback()
-                raise Exception(error)
+                # raise Exception(error)
         
 
         except Exception as error:
-
-            return {'validacao':False, 'erro':error}
+            erro = type(error).__name__
+            return {'validacao':False, 'erro':str(erro)+ f': {error} '}
 
 aspf = ASPF()

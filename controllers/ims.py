@@ -103,7 +103,7 @@ class IMS():
                         '{dadosPesquisa['enderecoProdutor']}',
                         '{dadosPesquisa['telefoneFixoProdutor']}',
                         '{dadosPesquisa['celularProdutor']}',
-                        '{dadosPesquisa['temwhatsProdutor']}',
+                        '{'S' if dadosPesquisa['temwhatsProdutor']  == 'sim' else 'N'}',
                         '{dadosPesquisa['emailProdutor']}',
                         {dadosPesquisa['areaTotal']},
                         {dadosPesquisa['areaCultivo']},
@@ -185,17 +185,17 @@ class IMS():
 
                 connect.commit()
 
-
-                return dados[0]
+                return {'validacao':True, 'idoform':dados[0]}
+                
             
             except Exception as error:
-               
+                traceback.print_exc()
                 connect.rollback()
                 raise Exception(error)
         except Exception as error:
            
-            dados = False
-            return dados
+            erro = type(error).__name__
+            return {'validacao':False, 'erro':str(erro)+ f': {error} '}
         
         #ims = cursor.fetchall()
 

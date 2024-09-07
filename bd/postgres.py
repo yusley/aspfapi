@@ -3,11 +3,15 @@ import os
 
 from dotenv import dotenv_values
 current_dir = os.path.dirname(os.path.abspath(__file__))
-local_path = rf"{current_dir}\.env"
+local_path = rf"{current_dir}/.env"
 env_vars = dotenv_values(local_path)
+
 
 class Dbsession():
     def connection(self):
+
+        print(env_vars)
+
         conn = psycopg2.connect(
             dbname = env_vars.get("POSTGRES_DB"),
             user = env_vars.get("POSTGRES_USER"),
